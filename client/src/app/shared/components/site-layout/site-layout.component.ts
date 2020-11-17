@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core'
-import { AuthService } from '../../services/auth.service'
+import { Component, AfterViewInit, OnInit } from '@angular/core'
+
 import { Router } from '@angular/router'
 
 @Component({
@@ -18,18 +18,10 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
         // { url: '/login', name: 'Registeration' },
     ]
 
-    @ViewChild('demoModal') input
-
-    constructor(private auth: AuthService, private router: Router) {}
+    constructor(private router: Router) {}
     ngAfterViewInit(): void {}
 
     ngOnInit(): void {}
 
     onPageChange(url: string) {}
-
-    logout(event: Event) {
-        event.preventDefault()
-        this.auth.logout()
-        this.router.navigate(['/login'])
-    }
 }

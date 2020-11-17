@@ -15,20 +15,20 @@ export interface SubsoilUser {
 
 export interface Field {
     _id?: string
-    name: string
-    openDate: Date
-    subsoilUserId: string
+    name?: string
+    openDate?: Date
+    id?: string
 }
 export interface Well {
     _id?: string
-    code: string
-    depth: number
-    drillingDate: Date
-    fieldId: string
+    code?: string
+    depth?: number
+    drillingDate?: Date
+    id?: string
 }
 export interface Extraction {
     _id?: string
-    date: Date
-    amount: number
-    wellId: string
+    date?: Date
+    amount?: number
+    id?: string
 }

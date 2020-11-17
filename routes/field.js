@@ -4,18 +4,18 @@ const controller = require('../controllers/field')
 const router = express.Router()
 
 router.get(
-    '/',
-    passport.authenticate('jwt', { session: false }),
+    '/:id',
+
     controller.getAll
 )
 router.post(
     '/',
-    passport.authenticate('jwt', { session: false }),
+
     controller.create
 )
 router.delete(
     '/:id',
-    passport.authenticate('jwt', { session: false }),
+
     controller.remove
 )
 

@@ -13,7 +13,7 @@ module.exports.create = async function (req, res) {
 
 module.exports.getAll = async function (req, res) {
     try {
-        const wells = await Well.find()
+        const wells = await Well.find({ id: req.params.id })
         res.status(200).json(wells)
     } catch (e) {
         errorHandler(res, e)

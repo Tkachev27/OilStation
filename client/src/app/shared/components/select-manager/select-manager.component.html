@@ -10,7 +10,7 @@
             <td>
                 <label>
                     <input
-                        name="group1"
+                        name="{{ template.type }}"
                         type="radio"
                         (click)="onChangeItem(item)"
                     />
@@ -25,7 +25,18 @@
         </tr>
     </tbody>
     <ng-template #empty>
-        <div class="center">There are no items in category</div></ng-template
+        <div class="center" *ngIf="template.type == 'SubsoilUser'"
+            >There are no items in category</div
+        >
+        <div class="center" *ngIf="template.type == 'Field'"
+            >There are no items in category or choose a subsoil user</div
+        >
+        <div class="center" *ngIf="template.type == 'Well'"
+            >There are no items in category or choose a field</div
+        >
+        <div class="center" *ngIf="template.type == 'Extraction'"
+            >There are no items in category or choose a well</div
+        ></ng-template
     >
 </table>
 <ng-template #loader>

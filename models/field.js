@@ -9,7 +9,7 @@ const fieldSchema = new Schema({
     openDate: {
         type: String,
     },
-    subsoilUserId: {
+    id: {
         type: String,
         required: true,
     },

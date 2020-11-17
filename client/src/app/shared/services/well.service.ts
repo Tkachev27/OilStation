@@ -8,8 +8,8 @@ import { Message, Well } from '../interfaces'
 })
 export class WellService {
     constructor(private http: HttpClient) {}
-    fetch(): Observable<Well[]> {
-        return this.http.get<Well[]>(`/api/well`)
+    fetch(id: string): Observable<Well[]> {
+        return this.http.get<Well[]>(`/api/well/${id}`)
     }
 
     create(wells: Array<Well>): Observable<Well[]> {

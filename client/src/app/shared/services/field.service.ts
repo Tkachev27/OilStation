@@ -8,8 +8,8 @@ import { Message, Field } from '../interfaces'
 })
 export class FieldService {
     constructor(private http: HttpClient) {}
-    fetch(): Observable<Field[]> {
-        return this.http.get<Field[]>(`/api/field`)
+    fetch(id: string): Observable<Field[]> {
+        return this.http.get<Field[]>(`/api/field/${id}`)
     }
 
     create(fields: Array<Field>): Observable<Field[]> {

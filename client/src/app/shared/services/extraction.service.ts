@@ -8,8 +8,8 @@ import { Message, Extraction } from '../interfaces'
 })
 export class ExtractionService {
     constructor(private http: HttpClient) {}
-    fetch(): Observable<Extraction[]> {
-        return this.http.get<Extraction[]>(`/api/extraction`)
+    fetch(id: string): Observable<Extraction[]> {
+        return this.http.get<Extraction[]>(`/api/extraction/${id}`)
     }
 
     create(extractions: Array<Extraction>): Observable<Extraction[]> {

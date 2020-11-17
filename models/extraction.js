@@ -9,7 +9,7 @@ const extractionSchema = new Schema({
     amount: {
         type: Number,
     },
-    wellId: {
+    id: {
         type: String,
         required: true,
     },

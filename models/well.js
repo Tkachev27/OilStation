@@ -13,7 +13,7 @@ const wellSchema = new Schema({
         type: String,
         required: true,
     },
-    fieldId: {
+    id: {
         type: String,
         required: true,
     },
