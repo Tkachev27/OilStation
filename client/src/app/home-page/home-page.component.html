@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col s3">
+        <app-select-manager
+            [items]="subsoilUsers"
+            [template]="subsoilUserTemplate"
+            (onChangeEvent)="updateSelectedUser($event)"
+            (onDeleteEvent)="deleteSelectedUser($event)"
+        >
+        </app-select-manager>
+        <app-create-modal
+            [template]="subsoilUserTemplate"
+            [service]="subsoilUserService"
+            (onChangeEvent)="updateUsers($event)"
+            [id]="userId"
+        ></app-create-modal>
+    </div>
+</div>

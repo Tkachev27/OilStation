@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../shared/services/auth.service'
 import { Router } from '@angular/router'
-//import { MaterialService } from '../shared/services/Material.service'
+import { MaterialService } from '../shared/services/Material.service'
 
 @Component({
     selector: 'app-register-page',
@@ -28,13 +28,13 @@ export class RegisterPageComponent implements OnInit {
         this.form.disable()
         this.auth.register(this.form.value).subscribe(
             (user) => {
-                // MaterialService.toast('User created')
+                MaterialService.toast('User created')
                 this.onChange.emit(user)
                 this.form.reset()
                 this.form.enable()
             },
             (error) => {
-                // MaterialService.toast(error.error.message)
+                MaterialService.toast(error.error.message)
                 this.form.enable()
             }
         )

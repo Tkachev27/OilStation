@@ -1,0 +1,33 @@
+<table *ngIf="!loading; else loader">
+    <tbody class="collection mb1" *ngIf="items.length !== 0; else empty">
+        <tr *ngFor="let item of items; let i = index">
+            <td class="collection-item">
+                {{ item[template.options[0].name] }}
+                <p *ngFor="let option of template.options; let i = index">
+                    <span *ngIf="i != 0">{{ item[option.name] }}</span>
+                </p>
+            </td>
+            <td>
+                <label>
+                    <input
+                        name="group1"
+                        type="radio"
+                        (click)="onChangeItem(item)"
+                    />
+                    <span></span>
+                </label>
+            </td>
+            <td class="delete"
+                ><i (click)="onDelete(item)" class="material-icons"
+                    >delete</i
+                ></td
+            >
+        </tr>
+    </tbody>
+    <ng-template #empty>
+        <div class="center">There are no items in category</div></ng-template
+    >
+</table>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

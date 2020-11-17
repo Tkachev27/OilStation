@@ -9,8 +9,10 @@ import { TokenInterceptor } from './shared/services/token.interceptor'
 import { SiteLayoutComponent } from './shared/components/site-layout/site-layout.component'
 import { RegisterPageComponent } from './register-page/register-page.component'
 import { LoginPageComponent } from './login-page/login-page.component'
-import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component'
-import { RouterModule } from '@angular/router'
+import { HomePageComponent } from './home-page/home-page.component';
+import { SelectManagerComponent } from './shared/components/select-manager/select-manager.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import { CreateModalComponent } from './shared/components/create-modal/create-modal.component'
 
 @NgModule({
     declarations: [
@@ -18,7 +20,10 @@ import { RouterModule } from '@angular/router'
         SiteLayoutComponent,
         LoginPageComponent,
         RegisterPageComponent,
-        AuthLayoutComponent,
+        HomePageComponent,
+        SelectManagerComponent,
+        LoaderComponent,
+        CreateModalComponent,
     ],
     imports: [
         AppRoutingModule,
