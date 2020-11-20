@@ -1,11 +1,12 @@
 <div class="row" *ngIf="!loading; else loader">
     <div class="col s3">
         <div class="center">
-            <h3>Subsoil Users</h3>
+            <h3>Недропользователи</h3>
         </div>
         <app-select-manager
             [items]="subsoilUsers"
             [template]="subsoilUserTemplate"
+            [service]="subsoilUserService"
             (onChangeEvent)="updateSelectedUser($event)"
             (onDeleteEvent)="deleteSelectedUser($event)"
         >
@@ -19,11 +20,12 @@
     </div>
     <div class="col s9">
         <div class="center">
-            <h3>Fields</h3>
+            <h3>Месторождения</h3>
         </div>
         <app-select-manager
             [items]="fields"
             [template]="fieldTemplate"
+            [service]="fieldService"
             (onChangeEvent)="updateSelectedField($event)"
             (onDeleteEvent)="deleteSelectedField($event)"
         >
@@ -38,11 +40,12 @@
     ></div>
     <div class="col s9 offset-s3">
         <div class="center">
-            <h3>Wells</h3>
+            <h3>Скважины</h3>
         </div>
         <app-select-manager
             [items]="wells"
             [template]="wellTemplate"
+            [service]="wellService"
             (onChangeEvent)="updateSelectedWell($event)"
             (onDeleteEvent)="deleteSelectedWell($event)"
         >
@@ -57,9 +60,9 @@
     ></div>
     <div class="col s9 offset-s3">
         <div class="center">
-            <h3>Extractions</h3>
+            <h3>Добычи</h3>
         </div>
-        <div class="col s12" *ngIf="wellId">
+        <div class="col s12" *ngIf="fielId">
             <div class="startDate col s6">
                 <input
                     id="startDate"
@@ -77,11 +80,18 @@
                     (change)="onChangeFilterDate()"
                 />
                 <label for="endDate">End date</label>
-            </div></div
-        >
+            </div>
+            <button
+                class="btn"
+                *ngIf="startDate && endDate"
+                (click)="onLoadExtraction()"
+                >Load</button
+            >
+        </div>
         <app-select-manager
             [items]="extractionsShow"
             [template]="extractionTemplate"
+            [service]="extractionService"
             (onChangeEvent)="updateSelectedExtraction($event)"
             (onDeleteEvent)="deleteSelectedExtraction($event)"
         >
@@ -91,7 +101,7 @@
             [service]="extractionService"
             (onChangeEvent)="updateExtractions($event)"
             [id]="wellId"
-            *ngIf="wellId"
+            *ngIf="extractionsLoaded"
         ></app-create-modal
     ></div>
 </div>
