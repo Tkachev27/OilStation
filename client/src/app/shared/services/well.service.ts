@@ -19,11 +19,7 @@ export class WellService {
     delete(well: Well): Observable<Message> {
         return this.http.delete<Message>(`/api/well/${well._id}`)
     }
-
-    // getById(id: string): Observable<Brand> {
-    //     return this.http.get<Brand>(`/api/brand/${id}`)
-    // }
-    // update(brand: Brand): Observable<Brand> {
-    //     return this.http.patch<Brand>(`/api/brand/${brand._id}`, brand)
-    // }
+    update(well: Well): Observable<Well> {
+        return this.http.patch<Well>(`/api/well/${well._id}`, well)
+    }
 }

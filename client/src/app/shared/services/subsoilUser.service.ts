@@ -19,11 +19,10 @@ export class SubsoilUserService {
     delete(subsoilUser: SubsoilUser): Observable<Message> {
         return this.http.delete<Message>(`/api/subsoilUser/${subsoilUser._id}`)
     }
-
-    // getById(id: string): Observable<Brand> {
-    //     return this.http.get<Brand>(`/api/brand/${id}`)
-    // }
-    // update(brand: Brand): Observable<Brand> {
-    //     return this.http.patch<Brand>(`/api/brand/${brand._id}`, brand)
-    // }
+    update(subsoilUser: SubsoilUser): Observable<SubsoilUser> {
+        return this.http.patch<SubsoilUser>(
+            `/api/subsoilUser/${subsoilUser._id}`,
+            subsoilUser
+        )
+    }
 }

@@ -1,7 +1,10 @@
-<div class="center">
+<div class="center" *ngIf="!item">
     <button class="btn grey lighten-1 waves-effect" (click)="onAddItem()">
         New Item
     </button>
+</div>
+<div class="center edit" *ngIf="item">
+    <i class="material-icons" (click)="onEditItem()"> edit </i>
 </div>
 
 <div class="modal" #modal>

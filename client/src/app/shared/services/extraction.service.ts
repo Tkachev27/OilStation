@@ -8,8 +8,8 @@ import { Message, Extraction } from '../interfaces'
 })
 export class ExtractionService {
     constructor(private http: HttpClient) {}
-    fetch(id: string): Observable<Extraction[]> {
-        return this.http.get<Extraction[]>(`/api/extraction/${id}`)
+    fetch(id: string, start: Date, end: Date): Observable<any> {
+        return this.http.get<any>(`/api/extraction/${id}+${start}+${end}`)
     }
 
     create(extractions: Array<Extraction>): Observable<Extraction[]> {
@@ -23,7 +23,10 @@ export class ExtractionService {
     // getById(id: string): Observable<Brand> {
     //     return this.http.get<Brand>(`/api/brand/${id}`)
     // }
-    // update(brand: Brand): Observable<Brand> {
-    //     return this.http.patch<Brand>(`/api/brand/${brand._id}`, brand)
-    // }
+    update(extraction: Extraction): Observable<Extraction> {
+        return this.http.patch<Extraction>(
+            `/api/extraction/${extraction._id}`,
+            extraction
+        )
+    }
 }

@@ -18,6 +18,11 @@ router.delete(
 
     controller.remove
 )
+router.patch(
+    '/:id',
+
+    controller.update
+)
 
 module.exports = router
 

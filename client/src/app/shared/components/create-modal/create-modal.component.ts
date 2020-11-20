@@ -25,26 +25,28 @@ export class CreateModalComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('modal') modalRef: ElementRef
     modal: MaterialInstance
     form: FormGroup
+    fields: FormArray
     loadingModal = false
     @Input() id
 
     @Input() template
     @Input() service
+    @Input() item: any
     @Output('onChangeEvent') onChange = new EventEmitter<SubsoilUser>()
     constructor() {}
 
     ngOnInit(): void {
         this.loadingModal = true
-        this.form = new FormGroup({
-            fields: new FormArray([]),
-        })
+        this.fields = new FormArray([])
+        this.form = new FormGroup({ fields: this.fields })
         for (let item of this.template.options) {
             const control = new FormControl(null, Validators.required)
-            ;(this.form.get('fields') as FormArray).push(control)
+            this.fields.push(control)
         }
 
         this.loadingModal = false
     }
+
     ngAfterViewInit() {
         this.modal = MaterialService.initModal(this.modalRef)
     }
@@ -53,21 +55,51 @@ export class CreateModalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.form.reset()
         MaterialService.updateTextInputs()
     }
-    onModalSubmit() {
-        let data: any = {
-            id: this.id,
-        }
+    onEditItem() {
+        this.modal.open()
+        let list = []
+        this.id = this.item.id
+
         for (let i = 0; i < this.template.options.length; i++) {
-            data[this.template.options[i].name] = this.form.value.fields[i]
+            list.push(this.item[this.template.options[i].name])
         }
 
-        this.service.create(data).subscribe(
-            (data) => {
-                MaterialService.toast('Created')
-                this.onChange.emit(data)
-            },
-            (error) => MaterialService.toast(error.error.message)
-        )
+        this.fields.patchValue(list)
+
+        MaterialService.updateTextInputs()
+    }
+    onModalSubmit() {
+        if (this.item) {
+            for (let i = 0; i < this.template.options.length; i++) {
+                this.item[
+                    this.template.options[i].name
+                ] = this.form.value.fields[i]
+            }
+
+            this.service.update(this.item).subscribe(
+                (item) => {
+                    MaterialService.toast('Updated')
+                    this.onChange.emit(item)
+                },
+                (error) => MaterialService.toast(error.error.message)
+            )
+        } else {
+            let data: any = {
+                id: this.id,
+            }
+            for (let i = 0; i < this.template.options.length; i++) {
+                data[this.template.options[i].name] = this.form.value.fields[i]
+            }
+
+            this.service.create(data).subscribe(
+                (data) => {
+                    MaterialService.toast('Created')
+                    this.onChange.emit(data)
+                },
+                (error) => MaterialService.toast(error.error.message)
+            )
+        }
+
         this.modal.close()
     }
     onModalCancel() {
