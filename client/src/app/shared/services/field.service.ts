@@ -19,11 +19,7 @@ export class FieldService {
     delete(field: Field): Observable<Message> {
         return this.http.delete<Message>(`/api/field/${field._id}`)
     }
-
-    // getById(id: string): Observable<Brand> {
-    //     return this.http.get<Brand>(`/api/brand/${id}`)
-    // }
-    // update(brand: Brand): Observable<Brand> {
-    //     return this.http.patch<Brand>(`/api/brand/${brand._id}`, brand)
-    // }
+    update(field: Field): Observable<Field> {
+        return this.http.patch<Field>(`/api/field/${field._id}`, field)
+    }
 }

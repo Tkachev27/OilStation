@@ -1,10 +1,5 @@
 import { ElementRef } from '@angular/core'
 import M from 'materialize-css'
-// if (typeof M == 'undefined') {
-//     var M: any = {}
-// }
-
-//declare var M
 
 export interface MaterialInstance {
     open?(): void

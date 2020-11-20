@@ -22,20 +22,29 @@
                     >delete</i
                 ></td
             >
+            <app-create-modal
+                [template]="template"
+                [item]="item"
+                [service]="service"
+                (onChangeEvent)="updateItem($event)"
+                [id]="item.id"
+            ></app-create-modal>
         </tr>
     </tbody>
     <ng-template #empty>
         <div class="center" *ngIf="template.type == 'SubsoilUser'"
-            >There are no items in category</div
+            >Нет элементов в категории</div
         >
         <div class="center" *ngIf="template.type == 'Field'"
-            >There are no items in category or choose a subsoil user</div
+            >Нет элементов в категории, для начала работы выберите
+            недропользователя</div
         >
         <div class="center" *ngIf="template.type == 'Well'"
-            >There are no items in category or choose a field</div
+            >Нет элементов в категории, для начала работы выберите
+            месторождение</div
         >
         <div class="center" *ngIf="template.type == 'Extraction'"
-            >There are no items in category or choose a well</div
+            >Нет элементов в категории, для начала работы выберите скважину</div
         ></ng-template
     >
 </table>

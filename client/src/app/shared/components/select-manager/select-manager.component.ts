@@ -10,6 +10,7 @@ import { SubsoilUser } from '../../interfaces'
 export class SelectManagerComponent implements OnInit {
     @Input() items: Array<any>
     @Input() template
+    @Input() service
     @Output('onChangeEvent') onChange = new EventEmitter<SubsoilUser>()
     @Output('onDeleteEvent') onDel = new EventEmitter<SubsoilUser>()
     loading = false
@@ -22,5 +23,8 @@ export class SelectManagerComponent implements OnInit {
     }
     onDelete(item) {
         this.onDel.emit(item)
+    }
+    updateItem(item) {
+        console.log(item)
     }
 }

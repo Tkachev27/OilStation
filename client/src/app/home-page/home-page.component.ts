@@ -37,6 +37,7 @@ export class HomePageComponent implements OnInit {
     extractionsShow: Array<Extraction> = []
     extractionTemplate = ExtractionTemplate
     selectedExtraction: Extraction = {}
+    extractionsLoaded = false
     wellId = ''
     startDate
     endDate
@@ -91,10 +92,12 @@ export class HomePageComponent implements OnInit {
     deleteSelectedUser(user: SubsoilUser) {
         this.subsoilUserService.delete(user).subscribe((message) => {
             MaterialService.toast(message.message)
-            this.subsoilUsers.splice(
-                this.subsoilUsers.findIndex((p) => p._id == user._id),
-                1
-            )
+            if (message.message == 'Subsoil User delated.') {
+                this.subsoilUsers.splice(
+                    this.subsoilUsers.findIndex((p) => p._id == user._id),
+                    1
+                )
+            }
         })
     }
     updateSelectedField(field: Field) {
@@ -122,10 +125,12 @@ export class HomePageComponent implements OnInit {
     deleteSelectedField(field: Field) {
         this.fieldService.delete(field).subscribe((message) => {
             MaterialService.toast(message.message)
-            this.fields.splice(
-                this.fields.findIndex((p) => p._id == field._id),
-                1
-            )
+            if (message.message == 'Field delated.') {
+                this.fields.splice(
+                    this.fields.findIndex((p) => p._id == field._id),
+                    1
+                )
+            }
         })
     }
 
@@ -137,16 +142,24 @@ export class HomePageComponent implements OnInit {
 
         this.selectedWell = {}
         this.selectedExtraction = {}
+        this.endDate = null
+        this.startDate = null
 
         this.selectedWell = well
+        this.extractionsLoaded = false
 
         this.wellId = this.selectedWell._id
-        this.extractionService.fetch(well._id).subscribe((extractions) => {
-            this.extractions = extractions
-            for (let item of extractions) {
-                this.extractionsShow.push(item)
-            }
-        })
+    }
+    onLoadExtraction() {
+        this.extractionService
+            .fetch(this.selectedWell._id, this.startDate, this.endDate)
+            .subscribe((extractions) => {
+                this.extractions = extractions
+                for (let item of extractions) {
+                    this.extractionsShow.push(item)
+                }
+                this.extractionsLoaded = true
+            })
     }
     updateWells(well: Well) {
         this.wells.push(well)
@@ -154,10 +167,12 @@ export class HomePageComponent implements OnInit {
     deleteSelectedWell(well: Well) {
         this.wellService.delete(well).subscribe((message) => {
             MaterialService.toast(message.message)
-            this.wells.splice(
-                this.wells.findIndex((p) => p._id == well._id),
-                1
-            )
+            if (message.message == 'Well delated.') {
+                this.wells.splice(
+                    this.wells.findIndex((p) => p._id == well._id),
+                    1
+                )
+            }
         })
     }
 
